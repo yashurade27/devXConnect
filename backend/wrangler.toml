@@ -1,0 +1,27 @@
+name = "devxconnect-backend"
+account_id = "c896dad4aab75a9cd01748e5217d19c7"
+workers_dev = true
+compatibility_date = "2025-01-27"
+main = "src/index.ts"
+
+[observability]
+enabled = true
+
+
+[build]
+command = "npm install && npm run build"
+
+[build.upload]
+exclude = ["mock-aws-s3", "aws-sdk", "nock", "@mswjs/interceptors/presets/node"]
+
+[env.production]
+name = "devxconnect-backend-production"
+compatibility_flags = ["nodejs_compat"]
+
+[env.production.vars]
+DATABASE_URL = "prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiODQ2NjMyZjItNDBhYS00MzZmLWI3YjMtZGE0Njc4ODNjNjVhIiwidGVuYW50X2lkIjoiNzk4NGMxNmZjMjQxMjM4YzhhYWI5OTlmYzU1YTUzNzQxZTE5ZjA0Y2E2YzFmMjM3YmRmMzQ2MzFkNzY2ZWZlYiIsImludGVybmFsX3NlY3JldCI6Ijg5NTJlYTIxLWVhNzEtNDc5YS1iZmVlLTMwZGNjNDY3ZjQwNiJ9.-Hpzn6b1cYsOCVW9Mwq6KSqVQyhTiD_A04VCdTYs0DE"
+JWT_SECRET = "Yash"
+
+[vars]
+DATABASE_URL = "prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiODQ2NjMyZjItNDBhYS00MzZmLWI3YjMtZGE0Njc4ODNjNjVhIiwidGVuYW50X2lkIjoiNzk4NGMxNmZjMjQxMjM4YzhhYWI5OTlmYzU1YTUzNzQxZTE5ZjA0Y2E2YzFmMjM3YmRmMzQ2MzFkNzY2ZWZlYiIsImludGVybmFsX3NlY3JldCI6Ijg5NTJlYTIxLWVhNzEtNDc5YS1iZmVlLTMwZGNjNDY3ZjQwNiJ9.-Hpzn6b1cYsOCVW9Mwq6KSqVQyhTiD_A04VCdTYs0DE"
+JWT_SECRET = "Yash"
