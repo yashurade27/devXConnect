@@ -1,6 +1,1 @@
-export const BACKEND_URL = "http://127.0.0.1:8787";
-
-
-//
-
-//"https://d22797ba-devxconnect-backend.pblpccoer2025.workers.dev"
+export const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://127.0.0.1:8787";

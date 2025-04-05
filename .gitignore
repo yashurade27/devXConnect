@@ -9,6 +9,7 @@ build/
 .env
 .env.local
 .env.*.local
+frontend/.env
 
 # Common folder
 common/
@@ -23,3 +24,9 @@ yarn-error.log*
 # OS-specific files
 .DS_Store
 Thumbs.db
+
+# Local Netlify folder
+.netlify
+
+# Configuration files
+frontend/src/config.ts

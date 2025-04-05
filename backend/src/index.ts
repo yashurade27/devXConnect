@@ -17,11 +17,18 @@ app.get("/test-env", (c) => {
 
 console.log("✅ API Routes Registered:");
 
-const allowedOrigins = ['http://localhost:5173']; // Add more if needed
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://127.0.0.1:5173',
+  'https://devxconnect.netlify.app' 
+];
 
 app.options('/*', (c) => {
   const origin = c.req.header('Origin') || '*';
-  c.res.headers.set('Access-Control-Allow-Origin', origin);
+  console.log("CORS Preflight Request Origin:", origin); // Debug log
+  if (allowedOrigins.includes(origin)) {
+    c.res.headers.set('Access-Control-Allow-Origin', origin);
+  }
   c.res.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   c.res.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   c.res.headers.set('Access-Control-Allow-Credentials', 'true');
@@ -29,12 +36,16 @@ app.options('/*', (c) => {
 });
 
 app.use(async (c, next) => {
-  await next();
   const origin = c.req.header('Origin') || '*';
-  c.res.headers.set('Access-Control-Allow-Origin', origin);
+  console.log("CORS Request Origin:", origin); // Debug log
+
+  // Always set CORS headers
+  c.res.headers.set('Access-Control-Allow-Origin', allowedOrigins.includes(origin) ? origin : '*');
   c.res.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   c.res.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   c.res.headers.set('Access-Control-Allow-Credentials', 'true');
+
+  await next();
 });
 
 app.route("/api/v1/user", userRouter);

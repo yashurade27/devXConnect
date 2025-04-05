@@ -27,8 +27,8 @@ export function Navbarhome({}: NavbarhomeProps) {
     const checkUserStatus = async () => {
       const token = localStorage.getItem("token");
 
-      if (!token) {
-        // User is not logged in, redirect to signup
+      if (!token && window.location.pathname !== "/bulk") {
+        // User is not logged in, redirect to signup unless on /bulk
         setIsLoggedIn(false);
         setLoading(false);
         navigate("/signup");
@@ -40,7 +40,7 @@ export function Navbarhome({}: NavbarhomeProps) {
 
       try {
         // Get user ID from token
-        const payload = JSON.parse(atob(token.split(".")[1]));
+        const payload = token ? JSON.parse(atob(token.split(".")[1])) : null;
         if (payload && payload.id) {
           // Fetch all posts and check if any match the user's ID
           const postsResponse = await axios.get(
